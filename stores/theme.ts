@@ -5,24 +5,28 @@ type Theme = 'light' | 'dark'
 
 interface ThemeStore {
   theme: string,
-  setTheme: (theme: Theme) => void
+  loadTheme: () => void,
+  setTheme: (theme: Theme) => void,
+  swapTheme: () => void
 }
 
-function loadInitialTheme(): Theme {
-  let theme = window.localStorage.getItem('theme') as Theme | null
+export const useThemeStore = create<ThemeStore>((set, get) => ({
+  theme: 'dark',
 
-  if (theme !== 'dark' && theme !== 'light')
-    theme = 'dark'
-  
-  window.localStorage.setItem('theme', theme)
-  document.documentElement.setAttribute('data-theme', theme)
+  loadTheme: () => {
+    set(() => {
+      let theme = window.localStorage.getItem('theme') as Theme | null
 
-  return theme
-}
+      if (theme !== 'dark' && theme !== 'light')
+        theme = 'dark'
+      
+      window.localStorage.setItem('theme', theme)
+      document.documentElement.setAttribute('data-theme', theme)
+      document.documentElement.classList.add(theme)
 
-export const useThemeStore = create<ThemeStore>((set) => ({
-  theme: loadInitialTheme(),
-
+      return { theme }
+    })
+  },
   setTheme: (newTheme: Theme) => {
     set((state) => {
       if (state.theme === newTheme) 
@@ -30,8 +34,11 @@ export const useThemeStore = create<ThemeStore>((set) => ({
 
       window.localStorage.setItem('theme', newTheme)
       document.documentElement.setAttribute('data-theme', newTheme)
+      document.documentElement.classList.remove(state.theme)
+      document.documentElement.classList.add(newTheme)
 
       return { theme: newTheme }
     })
-  }
+  },
+  swapTheme: () => get().setTheme(get().theme === 'dark' ? 'light' : 'dark')
 }))

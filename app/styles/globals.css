@@ -4,6 +4,7 @@
 
 body {
   transition: color 0.3s, background-color 0.3s; /* Todo: transition variables */
+  min-height: 100dvh;
 }
 
 span, p, h1, h2, h3, h4, h5, h6 {

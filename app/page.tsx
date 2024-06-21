@@ -6,8 +6,8 @@ export default function Homepage() {
   const delay = 0.4
 
   return (
-    <main>
-      <div className='w-screen h-[80vh] grid place-items-center box-content'>
+    <main className='h-full'>
+      <div className='w-screen h-[95vh] grid place-items-center box-content'>
         <div className='flex flex-col'>
           <motion.img 
             initial={{ opacity: 0, scale: 0.5, y: -50 }}
@@ -32,7 +32,7 @@ export default function Homepage() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration, delay: delay * 2.5 }}
           >
-            <p className='mt-1 ml-16 text-2xl text-gray-500'>Senior Front-end developer from Pilsen</p>
+            <p className='mt-1 ml-16 text-2xl text-gray-500'>Senior Front-End Developer from Pilsen</p>
           </motion.div>
         </div>
       </div>

@@ -4,6 +4,8 @@ import { GeistSans } from 'geist/font/sans'
 import './styles/globals.css'
 
 import Navbar from '@/components/Navbar'
+import Socials from '@/components/Socials'
+import Theme from '@/components/Theme'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,10 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={clsx(GeistSans.className, 'bg-background')}>
+      <body className={clsx(GeistSans.className, 'bg-background overflow-x-hidden')}>
+        <Theme />
         <Navbar />
 
         {children}
+
+        <div className='sticky bottom-0 left-full w-fit pb-4'>
+          <Socials />
+        </div>
       </body>
     </html>
   )
