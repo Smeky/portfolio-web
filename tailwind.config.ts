@@ -1,4 +1,5 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
+import { createThemes } from 'tw-colors'
 
 const config: Config = {
   content: [
@@ -6,15 +7,19 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+  plugins: [
+    createThemes({
+      light: {
+        'primary': '#000',
+        'secondary': '#6b7280',
+        'background': '#d6dbdc',
       },
-    },
-  },
-  plugins: [],
+      dark: {
+        'primary': '#eee',
+        'secondary': '#6b7280',
+        'background': '#111',
+      },
+    })
+  ],
 };
 export default config;
