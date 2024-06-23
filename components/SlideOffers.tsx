@@ -2,12 +2,12 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
-interface SlideOfferingsProps {
+interface SlideOffersProps {
   isLeaving?: boolean,
   onLeaveEnd?: () => void
 }
 
-export default function SlideOfferings({ isLeaving, onLeaveEnd }: Readonly<SlideOfferingsProps>) {
+export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOffersProps>) {
   const onAnimationEnd = React.useCallback((name: string) => name === 'exit' && onLeaveEnd?.(), [isLeaving])
   const duration = 0.7
 

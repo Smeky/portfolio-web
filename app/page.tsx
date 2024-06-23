@@ -1,24 +1,25 @@
 'use client'
 
 import SlideLanding from '@/components/SlideLanding'
-import SlideOfferings from '@/components/SlideOfferings'
-import Swiper from '@/components/Swiper'
+import SlideOffers from '@/components/SlideOffers'
+import Swiper, { SwiperRef } from '@/components/Swiper'
 import React from 'react'
 
 export default function Homepage() {
-  const [ index, setIndex ] = React.useState(0)
+  const swiperRef = React.useRef<SwiperRef>(null)
 
   // On keyboard arrow press
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
-        setIndex((prev) => prev + 1)
+        swiperRef.current?.nextSlide()
       } else if (e.key === 'ArrowLeft') {
-        setIndex((prev) => prev - 1)
+        swiperRef.current?.prevSlide()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
+
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
@@ -27,9 +28,9 @@ export default function Homepage() {
   return (
     <main>
       <div className='w-screen h-screen grid place-items-center box-content'>
-        <Swiper index={index}>
+        <Swiper ref={swiperRef}>
           <SlideLanding />
-          <SlideOfferings />
+          <SlideOffers />
         </Swiper>
       </div>
     </main>

@@ -1,6 +1,7 @@
 'use client'
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
+import AnimatedText from './AnimatedText'
 
 interface SlideLandingProps {
   isLeaving?: boolean,
@@ -59,8 +60,12 @@ export default function SlideLanding({ isLeaving, onLeaveEnd }: Readonly<SlideLa
             animate='to'
             exit='exit'
             onAnimationComplete={onAnimationEnd}
+            className='relative'
           >
-            <p className='mt-1 ml-16 text-2xl text-gray-500'>Senior Front-End Developer from Pilsen</p>
+            <p className='absolute mt-1 ml-16 text-2xl text-gray-500 whitespace-nowrap'>
+              I'm a&nbsp;
+              <AnimatedText strings={['Senior Front-End Developer', 'Web Developer', 'Game Developer']} duration={50} delay={2000} />
+            </p>
           </motion.div>
         </div>
       )}
