@@ -6,11 +6,12 @@ interface SwiperProps {
 }
 
 export interface SwiperRef extends React.RefObject<HTMLDivElement> {
+  setSlide: (index: number) => void,
   nextSlide: () => void,
   prevSlide: () => void,
 }
 
-const Swiper = React.forwardRef<SwiperRef, SwiperProps>(({ children }, ref) => {
+export default React.forwardRef<SwiperRef, SwiperProps>(function Swiper({ children }, ref) {
   const [index, setIndex] = React.useState(0)
   const [activeIndex, setActiveIndex] = React.useState(index)
   const indexRef = React.useRef(index)
@@ -28,6 +29,13 @@ const Swiper = React.forwardRef<SwiperRef, SwiperProps>(({ children }, ref) => {
 
   const child = React.useMemo(() => childrenWithProps[activeIndex], [childrenWithProps, activeIndex])
 
+  const setSlide = React.useCallback((i: number) => {
+    if (i === activeIndex) return
+    if (i < 0 || i >= childrenWithProps.length) return
+
+    setIndex(i)
+  }, [childrenWithProps, activeIndex])
+
   const nextSlide = React.useCallback(() => {
     setIndex(prev => (prev + 1) % childrenWithProps.length)
   }, [index])
@@ -38,9 +46,10 @@ const Swiper = React.forwardRef<SwiperRef, SwiperProps>(({ children }, ref) => {
 
   // Todo: fix type here
   React.useImperativeHandle(ref, (): any => ({
+    setSlide,
     nextSlide,
     prevSlide
-  }), [nextSlide, prevSlide])
+  }), [setSlide, nextSlide, prevSlide])
 
   return (
     <div ref={ref as React.RefObject<HTMLDivElement>}>
@@ -48,5 +57,3 @@ const Swiper = React.forwardRef<SwiperRef, SwiperProps>(({ children }, ref) => {
     </div>
   )
 })
-
-export default Swiper

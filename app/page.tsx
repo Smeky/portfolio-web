@@ -1,5 +1,6 @@
 'use client'
 
+import Navbar from '@/components/Navbar'
 import SlideLanding from '@/components/SlideLanding'
 import SlideOffers from '@/components/SlideOffers'
 import Swiper, { SwiperRef } from '@/components/Swiper'
@@ -27,6 +28,8 @@ export default function Homepage() {
 
   return (
     <main>
+      <Navbar onNavigationClick={(index: number) => swiperRef.current?.setSlide(index)} />
+
       <div className='w-screen h-screen grid place-items-center box-content'>
         <Swiper ref={swiperRef}>
           <SlideLanding />

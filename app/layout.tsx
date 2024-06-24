@@ -21,7 +21,6 @@ export default function RootLayout({
     <html lang='en'>
       <body className={clsx(GeistSans.className, 'bg-background overflow-x-hidden')}>
         <Theme />
-        <Navbar />
 
         {children}
 
