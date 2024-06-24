@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import SwiperNavigation from './SwiperNavigation'
 
 interface SwiperProps {
   children: React.ReactNode,
@@ -38,22 +39,26 @@ export default React.forwardRef<SwiperRef, SwiperProps>(function Swiper({ childr
 
   const nextSlide = React.useCallback(() => {
     setIndex(prev => (prev + 1) % childrenWithProps.length)
-  }, [index])
+  }, [childrenWithProps])
 
   const prevSlide = React.useCallback(() => {
     setIndex(prev => (prev - 1 + childrenWithProps.length) % childrenWithProps.length)
-  }, [index])
+  }, [childrenWithProps])
 
   // Todo: fix type here
   React.useImperativeHandle(ref, (): any => ({
     setSlide,
     nextSlide,
-    prevSlide
-  }), [setSlide, nextSlide, prevSlide])
+    prevSlide,
+    currentSlide: activeIndex,
+    slideCount: childrenWithProps.length,
+  }), [setSlide, nextSlide, prevSlide, activeIndex, childrenWithProps])
 
   return (
     <div ref={ref as React.RefObject<HTMLDivElement>}>
       {child}
+
+      <SwiperNavigation count={childrenWithProps.length} current={index} onClick={(index: number) => setSlide(index)} />
     </div>
   )
 })

@@ -2,6 +2,7 @@
 import ThemeToggle from '@/components/ThemeToggle'
 import NavbarMenu from '@/components/NavbarMenu'
 import { useEffect, useState } from 'react'
+import { Bars3Icon } from '@heroicons/react/24/outline'
 
 interface NavbarProps {
   onNavigationClick: (index: number) => void
@@ -13,7 +14,7 @@ export interface NavItem {
 }
 
 export default function Navbar({ onNavigationClick }: Readonly<NavbarProps>) {
-  const [isMenuOpen, setIsMenuOpen] = useState(true)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems: NavItem[] = [
     { id: 0, title: 'Home' },
@@ -35,11 +36,13 @@ export default function Navbar({ onNavigationClick }: Readonly<NavbarProps>) {
   })
 
   return (
-    <div className='sticky z-10 h-0 top-0 select-none'>
+    <div className='sticky z-20 h-0 top-0 select-none'>
       <div className='p-2 flex flex-row justify-between'>
         <ThemeToggle />
 
-        <div className='text-2xl cursor-pointer' onClick={() => setIsMenuOpen(true)}>🍔</div>
+        <div className='text-2xl p-1 cursor-pointer' onClick={() => setIsMenuOpen(true)}>
+          <Bars3Icon className='w-8 h-8 text-primary' />
+        </div>
         <NavbarMenu 
           open={isMenuOpen}
           items={navItems}
