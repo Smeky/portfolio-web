@@ -15,6 +15,12 @@ export default function AnimatedText({ strings, duration, delay }: Readonly<Anim
   const [animatedString, setAnimatedString] = useState('')
   const [reversed, setReversed] = useState(false)
   const [isWaiting, setIsWaiting] = useState(false)
+
+  /**
+   * Can be improved by:
+   *  - Randomly change the typing and backspace speed
+   *  - Add pretext that can sometimes be deleted as well "by accident" 
+   */
   
   useEffect(() => {
     const interval = setInterval(() => {
