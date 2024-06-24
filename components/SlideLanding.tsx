@@ -14,17 +14,17 @@ export default function SlideLanding({ isLeaving, onLeaveEnd }: Readonly<SlideLa
 
   const variants = [
     {
-      from: { opacity: 0, scale: 0.5, y: -50, transition: { duration }},
-      to: { opacity: 1, scale: 1, y: 0, transition: { duration, type: 'spring', stiffness: 100 }},
+      from: { opacity: 0, scale: 0.5, y: -50 },
+      to: { opacity: 1, scale: 1, y: 0, transition: { duration, type: 'spring', stiffness: 140 }},
       exit: { opacity: 0, scale: 0.5, y: -50, transition: { duration: duration * 0.5 }}
     },
     {
-      from: { opacity: 0, y: -25, transition: { duration }},
+      from: { opacity: 0, y: -25 },
       to: { opacity: 1, y: 0, transition: { duration, delay: 0.35 }},
       exit: { opacity: 0, y: -25, transition: { duration: duration * 0.5 }}
     },
     {
-      from: { opacity: 0, x: 25, transition: { duration }},
+      from: { opacity: 0, x: 25 },
       to: { opacity: 1, x: 0, transition: { duration, delay: 0.7 }},
       exit: { opacity: 0, x: 25, transition: { duration: duration * 0.5 }}
     }

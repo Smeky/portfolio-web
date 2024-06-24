@@ -24,7 +24,7 @@ export default function RootLayout({
 
         {children}
 
-        <div className='absolute bottom-0 right-0 w-fit pb-4'>
+        <div className='absolute z-20 bottom-0 right-0 w-fit pb-4'>
           <Socials />
         </div>
       </body>

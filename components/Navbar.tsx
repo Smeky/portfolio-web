@@ -38,7 +38,9 @@ export default function Navbar({ onNavigationClick }: Readonly<NavbarProps>) {
   return (
     <div className='sticky z-20 h-0 top-0 select-none'>
       <div className='p-2 flex flex-row justify-between'>
-        <ThemeToggle />
+        <div className='relative z-30'>
+          <ThemeToggle />
+        </div>
 
         <div className='text-2xl p-1 cursor-pointer' onClick={() => setIsMenuOpen(true)}>
           <Bars3Icon className='w-8 h-8 text-primary' />
