@@ -1,10 +1,11 @@
 'use client'
 
+import { throttle } from '@/common/throttle'
 import Navbar from '@/components/Navbar'
+import React from 'react'
 import SlideLanding from '@/components/SlideLanding'
 import SlideOffers from '@/components/SlideOffers'
 import Swiper, { SwiperRef } from '@/components/Swiper'
-import React from 'react'
 
 export default function Homepage() {
   const swiperRef = React.useRef<SwiperRef>(null)
@@ -24,7 +25,24 @@ export default function Homepage() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
+
+  // On scroll
+  React.useEffect(() => {
+    const handleWheel = throttle((e: WheelEvent) => {
+      if (e.deltaY > 0) {
+        swiperRef.current?.nextSlide()
+      } else {
+        swiperRef.current?.prevSlide()
+      }
+    }, 1000)
+
+    window.addEventListener('wheel', handleWheel)
+
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [])
+
   // Todo: Wait for a brief moment before first slide (maybe loading animation)
+  // Todo: Add swipe gesture
 
   return (
     <main>
