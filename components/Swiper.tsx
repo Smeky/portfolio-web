@@ -13,7 +13,7 @@ export interface SwiperRef extends React.RefObject<HTMLDivElement> {
 }
 
 export default React.forwardRef<SwiperRef, SwiperProps>(function Swiper({ children }, ref) {
-  const [index, setIndex] = React.useState(2)
+  const [index, setIndex] = React.useState(0)
   const [activeIndex, setActiveIndex] = React.useState(index)
   const indexRef = React.useRef(index)
   indexRef.current = index

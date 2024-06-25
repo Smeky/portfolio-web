@@ -2,20 +2,20 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
 
-interface SlideOffersProps {
+interface SlideSkillsProps {
   isLeaving?: boolean,
   onLeaveEnd?: () => void
 }
 
 const Cards = [
   { label: 'Vue', icon: '/icons/vue.svg', href: 'https://vuejs.org/' },
-  { label: 'Nuxt.js', icon: '/icons/nuxtjs.svg', href: 'https://nuxtjs.org/' },
+  { label: 'Nuxt.js', icon: '/icons/nuxtjs.svg', href: 'https://nuxt.com/' },
   { label: 'React', icon: '/icons/react.svg', href: 'https://reactjs.org/' },
   { label: 'Next.js', icon: '/icons/nextjs.svg', href: 'https://nextjs.org/' },
   { label: 'Typescript', icon: '/icons/typescript.svg', href: 'https://www.typescriptlang.org/' },
 ]
 
-export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOffersProps>) {
+export default function SlideSkills({ isLeaving, onLeaveEnd }: Readonly<SlideSkillsProps>) {
   const onAnimationEnd = React.useCallback((name: string) => name === 'exit' && onLeaveEnd?.(), [isLeaving])
   onAnimationEnd('exit')
 
@@ -35,7 +35,7 @@ export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOff
           
           <div className='grid grid-cols-5 gap-2'>
             {Cards.map((card, i) => (
-              <a href={card.href} target='_blank' key={i} className='group aspect-square flex flex-col items-center justify-center border-2 border-primary/20 rounded-md p-8 opacity-50 hover:opacity-100 transition-all duration-300'>
+              <a href={card.href} target='_blank' key={i} className='group aspect-square flex flex-col items-center justify-center border-2 border-primary/20 dark:border-primary/20 rounded-md p-8 opacity-50 hover:opacity-100 transition-all duration-300'>
                  <img src={card.icon || 'https://via.placeholder.com/150'} alt='icon' className='w-12 h-12 mb-4 group-hover:scale-125 grayscale-[50%] group-hover:grayscale-0 transition-all duration-300'/>
                  <p className='text-primary font-semibold opacity-50 group-hover:opacity-100 transition-opacity duration-300'>{card.label}</p>
               </a> 
