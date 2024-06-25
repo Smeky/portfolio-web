@@ -2,57 +2,84 @@
 import { useEffect, useState } from 'react'
 import styles from './AnimatedText.module.css'
 import AnimatedTextCaret from './AnimatedTextCaret'
+import clsx from 'clsx'
 
 interface AnimatedTextProps {
-  strings: string[],
-  duration: number,
-  delay: number,
-  inversed?: boolean
+  strings: string[]
+  speed?: number
+  pause?: number
+  delay?: number
+  loop?: boolean
+  onEnd?: () => void
+  className?: string
 }
 
-export default function AnimatedText({ strings, duration, delay }: Readonly<AnimatedTextProps>) {
+export default function AnimatedText({ strings, speed = 50, pause = 2000, delay = 0, loop = true, onEnd = () => {}, className }: Readonly<AnimatedTextProps>) {
   const [index, setIndex] = useState(0)
   const [animatedString, setAnimatedString] = useState('')
-  const [reversed, setReversed] = useState(false)
+  const [backspace, setBackspace] = useState(false)
   const [isWaiting, setIsWaiting] = useState(false)
+  const [initial, setInitial] = useState(true)
 
   /**
    * Can be improved by:
    *  - Randomly change the typing and backspace speed
    *  - Add pretext that can sometimes be deleted as well "by accident" 
    */
-  
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!reversed) {
-        if (animatedString.length < strings[index].length) {
-          setAnimatedString(strings[index].slice(0, animatedString.length + 1))
+    let interval: NodeJS.Timeout
+
+    const startAnimation = () => {
+      interval = setInterval(() => {
+        if (!backspace) {
+          if (animatedString.length < strings[index].length) {
+            setAnimatedString(strings[index].slice(0, animatedString.length + 1))
+          }
+          else {
+            clearInterval(interval)
+            setIsWaiting(true)
+
+            if (!loop && index === strings.length - 1) return onEnd()
+
+            setTimeout(() => {
+              setIsWaiting(false)
+              setBackspace(true)
+            }, pause)
+          }
         }
         else {
-          clearInterval(interval)
-          setIsWaiting(true)
-          setTimeout(() => {
-            setIsWaiting(false)
-            setReversed(true)
-          }, delay)
+          if (animatedString.length > 0) {
+            setAnimatedString(strings[index].slice(0, animatedString.length - 1))
+          }
+          else {
+            clearInterval(interval)
+            setBackspace(false)
+            setIndex((index + 1) % strings.length)
+          }
         }
-      }
-      else {
-        if (animatedString.length > 0) {
-          setAnimatedString(strings[index].slice(0, animatedString.length - 1))
-        }
-        else {
-          clearInterval(interval)
-          setReversed(false)
-          setIndex((index + 1) % strings.length)
-        }
-      }
-    }, reversed ? duration / 3 : duration)
+      }, backspace ? speed / 3 : speed)
+    }
+
+    // Initial start delay
+    let timeout: NodeJS.Timeout
+    if (initial) {
+      timeout = setTimeout(() => {
+        setInitial(false)
+        startAnimation()
+      }, delay)
+    }
+    else {
+      startAnimation()
+    }
     
-    return () => clearInterval(interval)
-  }, [animatedString, index, reversed, isWaiting])
+    return () => {
+      clearTimeout(timeout)
+      clearInterval(interval)
+    }
+  }, [animatedString, index, backspace, isWaiting])
   
   return (
-    <span className={styles.empty}>{ animatedString }<AnimatedTextCaret hidden={!isWaiting} /></span>
+    <span className={clsx(className, styles.empty)}>{ animatedString }<AnimatedTextCaret hidden={!isWaiting} /></span>
   )
 }

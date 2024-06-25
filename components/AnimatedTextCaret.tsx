@@ -15,6 +15,6 @@ export default function AnimatedTextCaret({ hidden }: Readonly<AnimatedTextCaret
   }, [visible, hidden])
 
   return (
-    <span className={!hidden && visible ? 'opacity-100' : 'opacity-0'}>_</span>
+    <span className={!hidden && visible ? 'hidden' : 'visible'}>_</span>
   )
 }

@@ -1,6 +1,8 @@
 'use client'
 import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
+import AnimatedTextCaret from './AnimatedTextCaret'
+import AnimatedText from './AnimatedText'
 
 interface SlideOffersProps {
   isLeaving?: boolean,
@@ -9,42 +11,64 @@ interface SlideOffersProps {
 
 export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOffersProps>) {
   const onAnimationEnd = React.useCallback((name: string) => name === 'exit' && onLeaveEnd?.(), [isLeaving])
-  const duration = 0.7
+  const [isTyping, setIsTyping] = React.useState(true)
 
   const variants = [
     {
-      from: { opacity: 0, scale: 0.5, y: -50, transition: { duration }},
-      to: { opacity: 1, scale: 1, y: 0, transition: { duration }},
-      exit: { opacity: 0, scale: 0.5, y: -50, transition: { duration: duration * 0.5 }}
+      from: { opacity: 0, x: -100},
+      to: { opacity: 1, x: 0, transition: { duration: 0.7, delay: 0.5 }},
+      exit: { opacity: 0, x: 100, transition: { duration: 0.35, ease: 'easeInOut' }}
     },
     {
-      from: { opacity: 0, y: -25, transition: { duration }},
-      to: { opacity: 1, y: 0, transition: { duration }},
-      exit: { opacity: 0, y: -25, transition: { duration: duration * 0.5 }}
+      from: { opacity: 0, x: -100},
+      to: { opacity: 1, x: 0, transition: { duration: 0.7, delay: 1.0 }},
+      exit: { opacity: 0, x: 100, transition: { duration: 0.35, ease: 'easeInOut' }}
     },
-    {
-      from: { opacity: 0, x: 25, transition: { duration }},
-      to: { opacity: 1, x: 0, transition: { duration, delay: 0.7 }},
-      exit: { opacity: 0, x: 25, transition: { duration: duration * 0.5 }}
-    }
   ]
 
   return (
     <AnimatePresence>
       {!isLeaving && (
-        <div className='flex flex-col'>
-          <motion.div
-            variants={variants[1]}
-            initial='from'
-            animate='to'
-            exit='exit'
-            onAnimationComplete={onAnimationEnd}
-          >
-            <h1 className='text-5xl font-bold text-primary'>
-              Hi! 👋<br />
-              my name is <span className='text-blue-500'>Tom</span>
-            </h1>
+        <div className='flex flex-col relative left-1/4 top-1/2 -translate-y-1/2 h-1/2'>
+          <motion.div exit={{ opacity: 0, y: -50 }} transition={{ duration: 0.5 }} className='mb-16'>
+            <AnimatedText
+              strings={['How I can help you']}
+              delay={500}
+              // speed={80}
+              loop={false}
+              onEnd={() => setIsTyping(false)}
+              className='text-5xl text-primary opacity-50 select-none'
+            />
           </motion.div>
+
+          {!isTyping && (
+            <div>
+              <motion.div
+                variants={variants[0]}
+                initial='from'
+                animate='to'
+                exit='exit'
+                className='mx-16 my-8 flex flex-col gap-1'
+              >
+                <h3 className='mb-3 text-4xl text-primary'>Web Development</h3>
+                <p className='ml-4 text-xl text-primary font-light'>• Crafting dynamic and responsive websites.</p>
+                <p className='ml-4 text-xl text-primary font-light'>• Seamless integration and user-friendly design.</p>
+              </motion.div>
+              <motion.div
+                variants={variants[1]}
+                initial='from'
+                animate='to'
+                exit='exit'
+                className='mx-16 my-8 flex flex-col gap-1'
+                onAnimationComplete={onAnimationEnd}
+              >
+                <h3 className='mb-3 text-4xl text-primary'>Front-End Development in Vue and React</h3>
+                <p className='ml-4 text-xl text-primary font-light'>• Building modern, reactive interfaces with Vue and React.</p>
+                <p className='ml-4 text-xl text-primary font-light'>• Optimize performance for smooth user experience.</p>
+                <p className='ml-4 text-xl text-primary font-light'>• Expert in creating SPAs (Single Page Applications).</p>
+              </motion.div>
+            </div>
+          )}
         </div>
       )}
     </AnimatePresence>
