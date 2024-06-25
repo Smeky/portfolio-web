@@ -52,9 +52,9 @@ export default function NavbarMenu({ open, items, onClick, onClose }: Readonly<N
                 { items.map((item, i) => (
                   <motion.li
                     key={i}
-                    initial={{ opacity: 0, x: -200 }}
+                    initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ type: 'spring', stiffness: 100, delay: 0.2 + i * 0.2, duration: 0.5 }}
+                    transition={{ type: 'spring', stiffness: 120, delay: 0.2 + i * 0.2, duration: 0.5 }}
                   >
                     <p onClick={() => onItemClick(item)} className='p-2 text-3xl font-semibold text-primary cursor-pointer opacity-70 hover:opacity-100 transition-all duration-300'>
                       {item.title}

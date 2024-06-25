@@ -17,11 +17,11 @@ export default function Navbar({ onNavigationClick }: Readonly<NavbarProps>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems: NavItem[] = [
-    { id: 0, title: 'Home' },
-    { id: 1, title: 'My offers' },
-    { id: 2, title: 'My skills' },
-    { id: 3, title: 'My Work' },
-  ]
+    { title: 'Home' },
+    { title: 'How I Can Help You' },
+    { title: 'My skills' },
+    // { title: 'My Work' },
+  ].map((item, index) => ({ ...item, id: index }))
 
   // On 'Q" open menu
   useEffect(() => {

@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar'
 import React from 'react'
 import SlideLanding from '@/components/SlideLanding'
 import SlideOffers from '@/components/SlideOffers'
-import SwiperSlide from '@/components/SwiperSlide'
+import SlideSkills from '@/components/SlideSkills'
 import Swiper, { SwiperRef } from '@/components/Swiper'
 
 export default function Homepage() {
@@ -53,6 +53,7 @@ export default function Homepage() {
         <Swiper ref={swiperRef}>
           <SlideLanding />
           <SlideOffers />
+          <SlideSkills />
         </Swiper>
       </div>
     </main>

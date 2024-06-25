@@ -14,14 +14,14 @@ export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOff
 
   const variants = [
     {
-      from: { opacity: 0, x: -100},
+      from: { opacity: 0, x: -50},
       to: { opacity: 1, x: 0, transition: { duration: 1.0, delay: 0.5, type: 'spring', stiffness: 120 }},
-      exit: { opacity: 0, x: 100, transition: { duration: 0.35 }}
+      exit: { opacity: 0, x: 50, transition: { duration: 0.35 }}
     },
     {
-      from: { opacity: 0, x: -100},
+      from: { opacity: 0, x: -50},
       to: { opacity: 1, x: 0, transition: { duration: 1.0, delay: 1.0, type: 'spring', stiffness: 120 }},
-      exit: { opacity: 0, x: 100, transition: { duration: 0.35 }}
+      exit: { opacity: 0, x: 50, transition: { duration: 0.35 }}
     },
   ]
 
@@ -34,7 +34,6 @@ export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOff
               <AnimatedText
                 strings={['How I can help you']}
                 delay={500}
-                speed={500}
                 loop={false}
                 onEnd={() => setIsTyping(false)}
                 className='text-5xl text-primary opacity-50 select-none'
@@ -51,8 +50,8 @@ export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOff
                   className='mx-16 mt-16 flex flex-col gap-1'
                 >
                   <h3 className='mb-3 text-4xl text-primary'>Web Development</h3>
-                  <p className='ml-4 text-xl text-primary font-light'>• Crafting dynamic and responsive websites.</p>
-                  <p className='ml-4 text-xl text-primary font-light'>• Seamless integration and user-friendly design.</p>
+                  <p className='ml-4 text-xl text-primary font-light'>• Crafting dynamic and responsive websites</p>
+                  <p className='ml-4 text-xl text-primary font-light'>• Seamless integration and user-friendly design</p>
                 </motion.div>
                 <motion.div
                   variants={variants[1]}
@@ -63,9 +62,9 @@ export default function SlideOffers({ isLeaving, onLeaveEnd }: Readonly<SlideOff
                   onAnimationComplete={onAnimationEnd}
                 >
                   <h3 className='mb-3 text-4xl text-primary'>Front-End Development in Vue and React</h3>
-                  <p className='ml-4 text-xl text-primary font-light'>• Building modern, reactive interfaces with Vue and React.</p>
-                  <p className='ml-4 text-xl text-primary font-light'>• Optimize performance for smooth user experience.</p>
-                  <p className='ml-4 text-xl text-primary font-light'>• Expert in creating SPAs (Single Page Applications).</p>
+                  <p className='ml-4 text-xl text-primary font-light'>• Building modern, reactive interfaces with Vue and React</p>
+                  <p className='ml-4 text-xl text-primary font-light'>• Optimize performance for smooth user experience</p>
+                  <p className='ml-4 text-xl text-primary font-light'>• Expert in creating SPAs (Single Page Applications)</p>
                 </motion.div>
               </div>
             )}

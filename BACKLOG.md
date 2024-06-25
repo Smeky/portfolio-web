@@ -6,3 +6,4 @@
 [ ] Setup eslint
 [ ] Push to history, make the "back" work
 [ ] Add breakpoints to the theme & logic 
+[ ] Animated underline for any text

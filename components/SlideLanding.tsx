@@ -64,7 +64,7 @@ export default function SlideLanding({ isLeaving, onLeaveEnd }: Readonly<SlideLa
           >
             <p className='absolute z-0 mt-1 ml-16 text-2xl text-gray-500 whitespace-nowrap'>
               I'm a&nbsp;
-              <AnimatedText strings={['Senior Front-End Developer', 'Web Developer', 'Game Developer']} pause={2000} />
+              <AnimatedText strings={['Senior Front-End Developer', 'Web Developer', 'Game Developer']} pause={2000} delay={2000} />
             </p>
           </motion.div>
         </div>

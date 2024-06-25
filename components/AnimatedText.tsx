@@ -64,8 +64,11 @@ export default function AnimatedText({ strings, speed = 50, pause = 2000, delay 
     // Initial start delay
     let timeout: NodeJS.Timeout
     if (initial) {
+      setIsWaiting(true)
+
       timeout = setTimeout(() => {
         setInitial(false)
+        setIsWaiting(false)
         startAnimation()
       }, delay)
     }
