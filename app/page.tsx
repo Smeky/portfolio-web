@@ -7,6 +7,7 @@ import SlideLanding from '@/components/SlideLanding'
 import SlideOffers from '@/components/SlideOffers'
 import SlideSkills from '@/components/SlideSkills'
 import Swiper, { SwiperRef } from '@/components/Swiper'
+import SwiperSideNavigation from '@/components/SwiperSideNavigation'
 
 export default function Homepage() {
   const swiperRef = React.useRef<SwiperRef>(null)
@@ -55,6 +56,9 @@ export default function Homepage() {
           <SlideOffers />
           <SlideSkills />
         </Swiper>
+
+        <SwiperSideNavigation left onClick={() => swiperRef.current?.prevSlide()} />
+        <SwiperSideNavigation right onClick={() => swiperRef.current?.nextSlide()} />
       </div>
     </main>
   )
