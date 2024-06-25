@@ -33,7 +33,7 @@ export default function SlideLanding({ isLeaving, onLeaveEnd }: Readonly<SlideLa
   return (
     <AnimatePresence>
       {!isLeaving && (
-        <div className='flex flex-col'>
+        <div className='flex flex-col w-[32rem]'>
           <motion.img
             variants={variants[0]}
             initial='from'

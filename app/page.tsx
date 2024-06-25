@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import React from 'react'
 import SlideLanding from '@/components/SlideLanding'
 import SlideOffers from '@/components/SlideOffers'
+import SwiperSlide from '@/components/SwiperSlide'
 import Swiper, { SwiperRef } from '@/components/Swiper'
 
 export default function Homepage() {

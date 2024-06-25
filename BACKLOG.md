@@ -4,3 +4,5 @@
 [ ] Theme should be in root layout. Navbar only calls store to swap
 [ ] Change color-theme change into a slider
 [ ] Setup eslint
+[ ] Push to history, make the "back" work
+[ ] Add breakpoints to the theme & logic 

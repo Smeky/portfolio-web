@@ -55,7 +55,7 @@ export default React.forwardRef<SwiperRef, SwiperProps>(function Swiper({ childr
   }), [setSlide, nextSlide, prevSlide, activeIndex, childrenWithProps])
 
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className='relative w-full h-full'>
+    <div ref={ref as React.RefObject<HTMLDivElement>} className='grid place-items-center w-full h-full p-8'>
       {child}
 
       <SwiperNavigation count={childrenWithProps.length} current={index} onClick={(index: number) => setSlide(index)} />
