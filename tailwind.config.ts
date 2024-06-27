@@ -20,7 +20,16 @@ const config: Config = {
         'secondary': '#6b7280',
         'background': '#111',
       },
-    })
+    }),
+    function ({ addUtilities }: { addUtilities: Function }) {
+      const newUtilities = {
+        '.translate-center': {
+          transform: 'translate(-50%, -50%)',
+        },
+      }
+      
+      addUtilities(newUtilities, ['responsive', 'hover'])
+    },
   ],
 };
 export default config;

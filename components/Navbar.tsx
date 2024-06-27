@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 
 interface NavbarProps {
-  onNavigationClick: (index: number) => void
+  onNavigationClick?: (index: number) => void
 }
 
 export interface NavItem {
@@ -13,7 +13,7 @@ export interface NavItem {
   title: string
 }
 
-export default function Navbar({ onNavigationClick }: Readonly<NavbarProps>) {
+export default function Navbar({ onNavigationClick = () => {} }: Readonly<NavbarProps>) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navItems: NavItem[] = [

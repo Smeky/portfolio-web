@@ -10,13 +10,13 @@ export default function ThemeToggle() {
     <div className='flex flex-row'>
       <div onClick={swapTheme} className='group p-1 rounded select-none cursor-pointer'>
         <MoonIcon className={clsx(
-            'w-6 h-6 text-primary transition-colors transition-opacity duration-300 hover:opacity-100',
+            'w-6 h-6 text-primary transition-all duration-300 hover:opacity-100',
             theme === 'dark' ? 'opacity-100' : 'opacity-25',
           )} />
       </div>
       <div onClick={swapTheme} className='group p-1 rounded select-none cursor-pointer'>
         <SunIcon className={clsx(
-            'w-6 h-6 text-primary transition-colors transition-opacity duration-300 hover:opacity-100',
+            'w-6 h-6 text-primary transition-all duration-300 hover:opacity-100',
             theme === 'light' ? 'opacity-100' : 'opacity-25',
           )} />
       </div>

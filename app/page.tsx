@@ -1,65 +1,56 @@
 'use client'
 
-import { throttle } from '@/common/throttle'
+import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import React from 'react'
-import SlideLanding from '@/components/SlideLanding'
-import SlideOffers from '@/components/SlideOffers'
-import SlideSkills from '@/components/SlideSkills'
-import Swiper, { SwiperRef } from '@/components/Swiper'
-import SwiperSideNavigation from '@/components/SwiperSideNavigation'
+import Sections from '@/components/Sections'
+import AnimatedText from '@/components/AnimatedText'
+import ScrollIndicator from '@/components/ScrollIndicator'
+import Swiper from '@/components/Swiper'
+import { useCallback } from 'react'
 
 export default function Homepage() {
-  const swiperRef = React.useRef<SwiperRef>(null)
-
-  // On keyboard arrow press
-  React.useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        swiperRef.current?.nextSlide()
-      } else if (e.key === 'ArrowLeft') {
-        swiperRef.current?.prevSlide()
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => window.removeEventListener('keydown', handleKeyDown)
+  const scrollTo = useCallback((id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }, [])
-
-
-  // On scroll
-  React.useEffect(() => {
-    const handleWheel = throttle((e: WheelEvent) => {
-      if (e.deltaY > 0) {
-        swiperRef.current?.nextSlide()
-      } else {
-        swiperRef.current?.prevSlide()
-      }
-    }, 1000)
-
-    window.addEventListener('wheel', handleWheel)
-
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [])
-
-  // Todo: Wait for a brief moment before first slide (maybe loading animation)
-  // Todo: Add swipe gesture
 
   return (
     <main>
-      <Navbar onNavigationClick={(index: number) => swiperRef.current?.setSlide(index)} />
+      <Navbar />
+      <ScrollIndicator onClick={() => scrollTo('sectionOffers')} className='absolute z-10 bottom-[4rem] left-1/2 -translate-x-1/2' />
 
-      <div className='w-screen h-screen grid place-items-center box-content'>
-        <Swiper ref={swiperRef}>
-          <SlideLanding />
-          <SlideOffers />
-          <SlideSkills />
-        </Swiper>
+      <Swiper className='w-screen h-screen' navigation pagination>
+        <Swiper.Slide className='p-8'>
+          <div className='grid place-items-center w-full h-full'>
+            <div className='flex flex-col w-full max-w-[32rem]'>
+              <img
+                src='/images/avatar.svg'
+                alt='Avatar'
+                className='-mb-4 w-40 h-40 self-end pointer-events-none'
+              />
+              <div>
+                <h1 className='text-5xl font-bold text-primary'>
+                  Hi! 👋<br />
+                  my name is <span className='text-blue-500'>Tom</span>
+                </h1>
+              </div>
+              <div className='relative'>
+                <p className='absolute z-0 mt-1 ml-16 text-2xl text-gray-500 whitespace-nowrap'>
+                  I'm a&nbsp;
+                  <AnimatedText strings={['Senior Front-End Developer', 'Web Developer', 'Game Developer']} pause={2000} delay={2000} />
+                </p>
+              </div>
+            </div>
+          </div>
+        </Swiper.Slide>
+        <Swiper.Slide>
+          <p className='text-primary'>Testy test 2222</p>
+        </Swiper.Slide>
+      </Swiper>
+    
+      <div id='sectionOffers'><Sections.Offers /></div>
+      <div id='sectionSkills'><Sections.Skills /></div>
 
-        <SwiperSideNavigation left onClick={() => swiperRef.current?.prevSlide()} />
-        <SwiperSideNavigation right onClick={() => swiperRef.current?.nextSlide()} />
-      </div>
+      <Footer />
     </main>
   )
 }

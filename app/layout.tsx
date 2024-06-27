@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import clsx from 'clsx'
 import { GeistSans } from 'geist/font/sans'
-import './styles/globals.css'
 
-import Navbar from '@/components/Navbar'
-import Socials from '@/components/Socials'
+// import '@/app/swiper'
 import Theme from '@/components/Theme'
+import './styles/globals.css'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,10 +22,6 @@ export default function RootLayout({
         <Theme />
 
         {children}
-
-        <div className='absolute z-20 bottom-0 right-0 w-fit pb-4'>
-          <Socials />
-        </div>
       </body>
     </html>
   )
