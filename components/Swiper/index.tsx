@@ -39,23 +39,26 @@ function SwiperWrapper({ className, children, navigation, pagination }: Readonly
         { children }
       </Swiper>
 
-      <div className='fixed z-10 mb-5 bottom-0 left-1/2 -translate-x-1/2 flex flex-row items-end select-none'>
-        { Array((children as React.ReactNode[])?.length ?? 0).fill(1).map((_, i) =>
-          <div 
-            key={i} 
-            onClick={() => swiperRef?.slideTo(i)}
-            className={clsx(
-              'group p-2 content-box cursor-pointer hover:opacity-100 transition-opacity duration-300',
-              i === activeIndex ? 'opacity-80' : 'opacity-20'
-            )}
-          >
-            <div className={clsx(
-              'overflow-visible rounded-full w-3 h-3 bg-primary group-hover:scale-150 transform-all duration-300',
-              i === activeIndex ? 'scale-125' : 'scale-100'
-            )}></div>
-          </div>
-        )}
-      </div>
+      {/* Pagination */}
+      { pagination && (
+        <div className='absolute z-10 mb-5 bottom-0 left-1/2 -translate-x-1/2 flex flex-row items-end select-none'>
+          { Array((children as React.ReactNode[])?.length ?? 0).fill(1).map((_, i) =>
+            <div 
+              key={i} 
+              onClick={() => swiperRef?.slideTo(i)}
+              className={clsx(
+                'group p-2 content-box cursor-pointer hover:opacity-100 transition-opacity duration-300',
+                i === activeIndex ? 'opacity-80' : 'opacity-20'
+              )}
+            >
+              <div className={clsx(
+                'overflow-visible rounded-full w-3 h-3 bg-primary group-hover:scale-150 transform-all duration-300',
+                i === activeIndex ? 'scale-125' : 'scale-100'
+              )}></div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

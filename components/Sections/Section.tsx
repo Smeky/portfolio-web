@@ -1,7 +1,7 @@
 'use client'
 
 interface SectionProps {
-  children: React.ReactNode,
+  children?: React.ReactNode,
 }
 
 export default function Section({ children }: Readonly<SectionProps>): JSX.Element {

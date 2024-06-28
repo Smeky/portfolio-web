@@ -1,6 +1,6 @@
 'use client'
 
-import { Section } from '@/components/Sections'
+import { Section } from '.'
 import clsx from 'clsx'
 
 const Cards = [
@@ -14,7 +14,7 @@ const Cards = [
 export default function SectionSkills() {
   return (
     <Section>
-      <h1 className='text-5xl text-primary opacity-50 mb-16'>My skills</h1>
+      <h2 className='text-5xl text-primary opacity-50 mb-16'>My skills</h2>
 
       <div className='flex flex-row flex-wrap gap-2'>
         {Cards.map((card, i) => (

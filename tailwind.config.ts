@@ -8,6 +8,13 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  theme: {
+    container: {
+      screens: {
+        xl: '1024px', // Change desktop max-width to 1024px, centers the content better
+      }
+    }
+  },
   plugins: [
     createThemes({
       light: {

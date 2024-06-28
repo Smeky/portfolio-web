@@ -18,7 +18,7 @@ export default function Homepage() {
       <Navbar />
       <ScrollIndicator onClick={() => scrollTo('sectionOffers')} className='absolute z-10 bottom-[4rem] left-1/2 -translate-x-1/2' />
 
-      <Swiper className='w-screen h-screen' navigation pagination>
+      <Swiper className='w-screen h-screen'>
         <Swiper.Slide className='p-8'>
           <div className='grid place-items-center w-full h-full'>
             <div className='flex flex-col w-full max-w-[32rem]'>
@@ -49,6 +49,7 @@ export default function Homepage() {
     
       <div id='sectionOffers'><Sections.Offers /></div>
       <div id='sectionSkills'><Sections.Skills /></div>
+      <div id='section3D'><Sections.Checkout3D /></div>
 
       <Footer />
     </main>

@@ -12,7 +12,7 @@ export default function ScrollIndicator({ className, onClick }: Readonly<ScrollI
   // Todo: Animation, add delay prop
   
   return (
-    <div onClick={onClick} className={clsx('group rounded-full border border-primary/20 hover:border-primary p-3 cursor-pointer transition-all duration-300 hover:p-4', className)}>
+    <div onClick={onClick} className={clsx('group rounded-full border border-primary/20 hover:border-primary p-3 hover:p-4 cursor-pointer select-none transition-all duration-300', className)}>
       <ArrowDownIcon className='w-6 h-6 lg:w-8 lg:h-8 text-primary opacity-70 group-hover:opacity-100 transition-all duration-300' />
     </div>
   )

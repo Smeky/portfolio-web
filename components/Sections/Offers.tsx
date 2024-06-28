@@ -1,6 +1,6 @@
 'use client'
 
-import { Section } from '@/components/Sections'
+import { Section } from '.'
 import AnimatedText from '@/components/AnimatedText'
 
 export default function SectionOffers() {
