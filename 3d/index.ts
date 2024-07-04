@@ -37,6 +37,12 @@ export class App3D {
   async setup(): Promise<void> {} 
 
   /**
+   * Destroy the scene
+   * @override
+   */
+  dispose(): void {}
+
+  /**
    * Update the scene
    * @override
    */
@@ -76,6 +82,8 @@ export class App3D {
   destroy(): void {
     this.renderer.setAnimationLoop(null)
     window.removeEventListener('resize', this.onResize)
+
+    this.dispose()
 
     this.controls.dispose()
     this.renderer.dispose()

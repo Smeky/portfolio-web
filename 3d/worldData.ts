@@ -22,7 +22,11 @@ export default class WorldDataApp extends App3D {
     this.scene.add(this.globe)
     this.scene.add(this.sun)
 
-    this._createEarth().then((earth: Three.Mesh) => this.globe.add(earth))
+    // this._createEarth().then((earth: Three.Mesh) => this.globe.add(earth))
+  }
+
+  dispose(): void {
+    this.hexagons?.dispose()
   }
 
   private async _createEarth(): Three.Mesh {
