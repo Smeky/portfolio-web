@@ -1,13 +1,13 @@
 // @ts-ignore
 import * as Three from 'three'
-import { App3D } from '@/3d'
+import { App3D } from '@/3d/App3d'
 import { loadTexture } from '@/3d/common'
-import HexagonSphere from './hexagonSphere'
+import HexagonSphere from './HexagonSphere'
 
 export default class WorldDataApp extends App3D {
   sun: Three.DirectionalLight
   globe: Three.Group
-  hexagons: HexagonSphere | undefined
+  hexagonsSphere: HexagonSphere | undefined
 
   async setup(): Promise<void> {
     this.camera.position.y = 2
@@ -16,17 +16,17 @@ export default class WorldDataApp extends App3D {
 
     this.sun = this._createSun()
     this.globe = new Three.Group()
-    this.hexagons = new HexagonSphere()
+    this.hexagonsSphere = new HexagonSphere()
 
-    this.globe.add(this.hexagons)
+    this.globe.add(this.hexagonsSphere)
     this.scene.add(this.globe)
     this.scene.add(this.sun)
 
-    // this._createEarth().then((earth: Three.Mesh) => this.globe.add(earth))
+    this._createEarth().then((earth: Three.Mesh) => this.globe.add(earth))
   }
 
   dispose(): void {
-    this.hexagons?.dispose()
+    this.hexagonsSphere?.dispose()
   }
 
   private async _createEarth(): Three.Mesh {
@@ -49,7 +49,6 @@ export default class WorldDataApp extends App3D {
 
     material.color = new Three.Color(0x333333)
 
-
     const sphere = new Three.Mesh(geometry, material)
 
     return sphere
@@ -64,6 +63,6 @@ export default class WorldDataApp extends App3D {
 
   update(delta: number): void {
     this.globe.rotation.y += 0.05 * delta
-    this.hexagons?.update(delta)
+    this.hexagonsSphere?.update(delta)
   }
 }

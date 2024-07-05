@@ -1,6 +1,6 @@
 'use client'
 
-import WorldDataApp from '@/3d/worldData'
+import WorldDataApp from '@/3d/WorldDataApp'
 import { useEffect, useRef } from 'react'
 
 interface WorldDataProps {
@@ -24,9 +24,9 @@ export default function WorldData({}: Readonly<WorldDataProps>): JSX.Element {
 
   useEffect(() => {
     if (module.hot) {
-      module.hot.accept('@/3d/worldData', () => {
+      module.hot.accept('@/3d/WorldDataApp', () => {
         appRef.current?.destroy()
-        const WorldDataApp = require('@/3d/worldData').default
+        const WorldDataApp = require('@/3d/WorldDataApp').default
         const app = new WorldDataApp({ container: containerRef.current as HTMLDivElement })
         appRef.current = app
         app.init().then(() => app.start())

@@ -66,7 +66,7 @@ export class App3D {
     this.camera = new Three.PerspectiveCamera(75, this.canvasWidth / this.canvasHeight, 0.1, 1000)
     this.scene.add(this.camera)
 
-    this.ambientLight = new Three.AmbientLight(0xffffff, 0.2)
+    this.ambientLight = new Three.AmbientLight(0xffffff, 0.5)
     this.scene.add(this.ambientLight)
 
     this.controls = new OrbitControls(this.camera, this.canvas)
@@ -104,6 +104,6 @@ export class App3D {
   }
 
   onResize(): void {
-
+    // Todo
   }
 }
