@@ -22,7 +22,7 @@ type HexagonsOptions = {
 
 class Hexagons {
   DefaultOptions: HexagonsOptions = {
-    hexagonSize: 0.005,
+    hexagonSize: 0.004,
     hexagonHeight: 0.1,
     sphereSize: 1,
   }
@@ -122,7 +122,10 @@ export default class HexagonSphere extends Three.Group {
   constructor() {
     super()
 
-    this.hexagons = new Hexagons({ hexagonSize: 0.005, hexagonHeight: 0.1, sphereSize: 1 })
+    const hexagonSize = 0.005
+    const hexagonHeight = 0.01
+
+    this.hexagons = new Hexagons({ hexagonSize, hexagonHeight, sphereSize: 1 })
     this.add(this.hexagons.mesh)
 
     // Setup the sphere layout
@@ -140,7 +143,7 @@ export default class HexagonSphere extends Three.Group {
       )
 
       const rotation = new Three.Quaternion().setFromUnitVectors(new Three.Vector3(0, 1, 0), position.clone().normalize())
-      const scale = new Three.Vector3(1, 0.01, 1)
+      const scale = new Three.Vector3(1, hexagonHeight, 1)
 
       matrix.compose(position, rotation, scale)
       this.hexagons.setMatrixAt(i, matrix)
@@ -155,7 +158,7 @@ export default class HexagonSphere extends Three.Group {
   }
 
   update(delta: number): void {
-    const speed = 0.1
+    const speed = 0.05
     this.orbitPoint.phi += speed * delta
     this.orbitPoint.theta += speed * delta
 
@@ -166,6 +169,7 @@ export default class HexagonSphere extends Three.Group {
     const radius = 0.2
     const nearest = this.hexagons.kdTree.nearest({ x, y, z }, 200, radius)
     const nearestCoordsSet = new Set(nearest.map(([coords]) => coords))
+    const hexagonHeight = this.hexagons.options.hexagonHeight
 
     this.lastNearestCoords.forEach(coords => {
       if (!nearestCoordsSet.has(coords)) {
@@ -173,8 +177,14 @@ export default class HexagonSphere extends Three.Group {
         this.hexagons.setColor(coords.index!, this.baseColor)
       }
     })
+
     nearest.forEach(([coords, distance]) => {
-      this.hexagons.setHeight(coords.index!, 5 * (1 - distance / radius))
+      // Height peaks at middle, lerps to 0 at radius
+      const height = Math.max(0.01, (1 + Math.atan(1 - distance / radius * Math.PI / 2) * 10))
+      
+      if (height <= hexagonHeight!) return
+
+      this.hexagons.setHeight(coords.index!, height)
       this.hexagons.setColor(coords.index!, new Three.Color(0xff0000).lerp(this.baseColor, distance / radius * 0.9))
     })
 

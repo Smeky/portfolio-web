@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "data:fetch": "npx tsx ./data/scripts/fetchData.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -15,6 +16,7 @@
     "framer-motion": "^11.2.11",
     "geist": "^1.3.0",
     "honeycomb-grid": "^4.1.5",
+    "jsdom": "^24.1.0",
     "kd-tree-javascript": "^1.0.3",
     "next": "14.2.4",
     "react": "^18",

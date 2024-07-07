@@ -35,6 +35,8 @@ export default class WorldDataApp extends App3D {
     // const elevationTexture = await loadTexture('/images/earth-elevation.jpg')
     const lightsTexture = await loadTexture('/images/earth-lights.png')
 
+    // Todo: add shaders to lightsTexture to make it glow + add gradient transition to make them flicker + have them change colors slightly
+
     const geometry = new Three.SphereGeometry(1, 256, 256)
     const material = new Three.MeshStandardMaterial({ 
       map: baseTexture, 
