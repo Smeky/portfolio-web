@@ -2,6 +2,8 @@
 
 # data
 /data/files
+/data/metadata.json
+*.tif
 
 # dependencies
 /node_modules

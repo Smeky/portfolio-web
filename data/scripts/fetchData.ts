@@ -30,7 +30,8 @@ const fetchData = async () => {
 
   console.log('Fetching data...')
   const entriesRes = await fetch('https://hub.worldpop.org/ajax/geolisting/category?id=77')
-  const entries = await entriesRes.json()
+  const data = await entriesRes.json()
+  const entries = data.filter((entry: any, index: number) => entry.popyear === "2020")
 
   console.log(entries.length + ' entries found')
 
